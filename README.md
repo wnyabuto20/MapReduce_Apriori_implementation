@@ -17,7 +17,6 @@ in input to the  first Map function(see below, where implementa- tion details ar
 # Input and Output Formats  
 The input dataset is a plaintext  file containing one transaction per line. Each transaction is a sequence of non-negative integers separated by a white space, such as
 11 8 9 20
-The output should contain the frequent itemsets in the input dataset with support at least MINSUPP, one frequent itemset per line with items separated by a space, 
-and followed (on the same line) by the support of the itemset. For example
+The output should contain the frequent itemsets in the input dataset with support at least MINSUPP, one frequent itemset per line with items separated by a space, and followed (on the same line) by the support of the itemset. For example
 20 8 204532
 would denote that the itemset {20, 8} has support 204532.
