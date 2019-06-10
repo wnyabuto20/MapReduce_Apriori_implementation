@@ -72,7 +72,7 @@ public class MRMiner{
          while(!terminate){ 
             HashMap<HashSet<Integer> , Integer> freqitemsetsknext = new HashMap<HashSet<Integer>, Integer>();
             HashSet<HashSet<Integer>> nonFreqs = new HashSet<HashSet<Integer>>();
-            //create new frequent itemsets
+            //create new frequent itemsets 
             for (HashSet<Integer> m : freqitemsetsk.keySet()) {
                 for (HashSet<Integer> l : freqitemsetsk.keySet()) {
                     int r = l.size();
@@ -83,6 +83,7 @@ public class MRMiner{
                         mCandidate.add(t);
                     }
                     mCandidate.addAll(l); //generating a candidate
+		 //checking is the generated itemset is of the size required, is frequent and has not already been generated,
                     if(mCandidate.size()== r+1 && !freqitemsetsknext.containsKey(mCandidate) && !nonFreqs.contains(mCandidate)){
                         boolean found =true;
                         Iterator<Integer> forM = mCandidate.iterator();
