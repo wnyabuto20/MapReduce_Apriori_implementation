@@ -18,7 +18,7 @@ import java.net.URI;
 
 public class MRMiner{
     static int minSupp;
-	static int corr;
+    static int corr;
     static int transPerBlock;
     static int newminSupp;
     static int totaltransactions = 4;
@@ -83,7 +83,7 @@ public class MRMiner{
                         mCandidate.add(t);
                     }
                     mCandidate.addAll(l); //generating a candidate
-		 //checking is the generated itemset is of the size required, is frequent and has not already been generated,
+		 //checking if the generated itemset is of the size required, is frequent and has not already been generated,
                     if(mCandidate.size()== r+1 && !freqitemsetsknext.containsKey(mCandidate) && !nonFreqs.contains(mCandidate)){
                         boolean found =true;
                         Iterator<Integer> forM = mCandidate.iterator();
