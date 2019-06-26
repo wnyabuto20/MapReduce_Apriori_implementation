@@ -22,19 +22,19 @@ public class MRMiner{
     static int transPerBlock;
     static int newminSupp;
     static int totaltransactions = 4;
-	public static void setMinSuppCorr(int m,int c,int t){
+    public static void setMinSuppCorr(int m,int c,int t){
 		minSupp = m;
 		corr = c;
-        transPerBlock = t;
-        newminSupp = (minSupp-corr)*(transPerBlock/totaltransactions);
-		}
+        	transPerBlock = t;
+        	newminSupp = (minSupp-corr)*(transPerBlock/totaltransactions);
+	}
     public static class firstMapper
         extends Mapper<Object, Text, Text, IntWritable>{
         public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException { 
 						
 	
-	    String[] transactions = value.toString().split("\n");
+	String[] transactions = value.toString().split("\n");
         HashMap<HashSet<Integer> , Integer> itemsets = new HashMap<HashSet<Integer>, Integer>();
         HashMap<HashSet<Integer> , Integer> freqitemsets = new HashMap<HashSet<Integer>, Integer>();
         HashMap<HashSet<Integer> , Integer> freqitemsetsk = new HashMap<HashSet<Integer>, Integer>();
@@ -45,22 +45,24 @@ public class MRMiner{
 		    String line = transactions[q];
 		    String[] items = line.split("\\s+");
 		    for(int i =0; i<items.length;i++){
-				HashSet<Integer> itemset = new HashSet<Integer>();
-			    Integer item = Integer.valueOf(items[i]);
-                itemset.add(item);
-                if (!itemsets.containsKey(itemset)){
-                    itemsets.put(itemset, 1);
-                   // freqitemsets.put(itemset,1);
-                    freqitemsetsk.put(itemset,1);
-                }
-                else{
-                    itemsets.replace(itemset, itemsets.get(itemset)+1);
-                    //freqitemsets.replace(itemset, itemsets.get(itemset)+1);
-                    freqitemsetsk.replace(itemset, itemsets.get(itemset)+1);
-                }	
-            }	
-        }
-        for ( HashSet<Integer> n : itemsets.keySet()) {
+			HashSet<Integer> itemset = new HashSet<Integer>();
+			Integer item = Integer.valueOf(items[i]);
+               		itemset.add(item);
+			    
+                	if (!itemsets.containsKey(itemset)){
+                        	itemsets.put(itemset, 1);
+                   		// freqitemsets.put(itemset,1);
+                    		freqitemsetsk.put(itemset,1);
+                	}
+			    
+                	else{
+                    	    itemsets.replace(itemset, itemsets.get(itemset)+1);
+                    	    //freqitemsets.replace(itemset, itemsets.get(itemset)+1);
+                    	    freqitemsetsk.replace(itemset, itemsets.get(itemset)+1);
+               		 }	
+            	 }	
+             }
+          for ( HashSet<Integer> n : itemsets.keySet()) {
             if(itemsets.get(n) < newminSupp){
             //freqitemsets.remove(n);
             freqitemsetsk.remove(n);
@@ -69,7 +71,7 @@ public class MRMiner{
           System.out.println(freqitemsetsk.keySet());
           boolean terminate = false;
           //Apriori
-         while(!terminate){ 
+          while(!terminate){ 
             HashMap<HashSet<Integer> , Integer> freqitemsetsknext = new HashMap<HashSet<Integer>, Integer>();
             HashSet<HashSet<Integer>> nonFreqs = new HashSet<HashSet<Integer>>();
             //create new frequent itemsets 
@@ -189,7 +191,7 @@ public class MRMiner{
 		    ArrayList<String> itemsets = new ArrayList<String>();
 		    URI[] myCacheFiles = context.getCacheFiles();
 		    Path forPatterns = new Path(myCacheFiles[0].getPath());
-          	String patternsFileName = forPatterns.getName().toString();
+          	    String patternsFileName = forPatterns.getName().toString();
 		    File file = new File(patternsFileName);
 		    FileReader fr = new FileReader(file);
 		    BufferedReader br = new BufferedReader(fr);
